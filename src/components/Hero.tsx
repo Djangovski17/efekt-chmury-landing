@@ -13,13 +13,11 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 py-24 md:py-32 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 animate-fade-in-down">
-            Niezapomniana atmosfera,<br />
-            profesjonalne efekty
-          </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-10 animate-fade-in-down" style={{animationDelay: '0.2s'}}>
+          <p className="text-xl md:text-2xl text-gray-700 mb-4 gradient-text">
             Podnieś poziom swojego wydarzenia dzięki profesjonalnemu efektowi ciężkiego dymu.
-            <br />Efekt Chmury to firma, która zapewni niezapomnianą atmosferę i ogromne wrażenie.
+          </p>
+          <p className="text-lg md:text-xl text-gray-600 mb-10">
+            Efekt Chmury to firma, która zapewni niezapomnianą atmosferę i ogromne wrażenie.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-down" style={{animationDelay: '0.4s'}}>
             <a href="#services" className="btn-primary">
