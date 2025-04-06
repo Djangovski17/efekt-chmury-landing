@@ -11,19 +11,1373 @@
     <meta property="og:title" content="Efekt Chmury - Profesjonalny Efekt Ciężkiego Dymu" />
     <meta property="og:description" content="Profesjonalne usługi ciężkiego dymu na wesela, eventy, sesje zdjęciowe w województwie lubelskim. Stwórz niezapomnianą atmosferę na swoim wydarzeniu." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/lovable-uploads/36b3f9dc-d4a6-453e-82f2-d3ca53b94def.png" />
+    <meta property="og:image" content="./images/logo.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@efektchmury" />
-    <meta name="twitter:image" content="/lovable-uploads/36b3f9dc-d4a6-453e-82f2-d3ca53b94def.png" />
+    <meta name="twitter:image" content="./images/logo.png" />
     
-    <link rel="icon" type="image/png" href="/lovable-uploads/36b3f9dc-d4a6-453e-82f2-d3ca53b94def.png" />
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <link rel="icon" type="image/png" href="./images/logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <style>
+      :root {
+        --cloud-light: #E5F3FF;
+        --cloud: #A8C5DF;
+        --cloud-dark: #4A6F8C;
+        --text-dark: #333333;
+        --text-gray: #666666;
+        --background: #f8fafc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--background);
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Navbar Styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 1.5rem 0;
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+      }
+
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar-logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .navbar-logo img {
+        height: 48px;
+        margin-right: 12px;
+      }
+
+      .navbar-logo span {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: white;
+        transition: color 0.3s ease;
+      }
+
+      .navbar.scrolled .navbar-logo span {
+        color: var(--cloud-dark);
+      }
+
+      .navbar-links {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-links a {
+        color: white;
+        margin-left: 2rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .navbar.scrolled .navbar-links a {
+        color: var(--text-dark);
+      }
+
+      .navbar-links a:hover {
+        color: var(--cloud-dark);
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .navbar.scrolled .mobile-menu-btn {
+        color: var(--text-dark);
+      }
+
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-menu-active {
+        display: block;
+      }
+
+      .mobile-menu .container {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .mobile-menu a {
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .mobile-menu a:last-child {
+        border-bottom: none;
+      }
+
+      .mobile-menu a:hover {
+        color: var(--cloud-dark);
+      }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background-image: linear-gradient(to bottom, var(--cloud-dark), rgba(168, 197, 223, 0.3), transparent);
+        overflow: hidden;
+      }
+
+      .smoke-animation-container {
+        position: absolute;
+        inset: 0;
+      }
+
+      .smoke-animation {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+        opacity: 0;
+        animation: smoke-pulse 8s infinite alternate;
+      }
+
+      .smoke-animation:nth-child(2) {
+        animation-delay: 2s;
+      }
+
+      .smoke-animation:nth-child(3) {
+        animation-delay: 4s;
+      }
+
+      @keyframes smoke-pulse {
+        0% {
+          transform: translate(-30%, 30%) scale(1);
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          transform: translate(30%, -30%) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        z-index: 10;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 1.5rem;
+        animation: fade-in-down 0.8s ease-out;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 2rem;
+        animation: fade-in-down 0.8s ease-out;
+        animation-delay: 0.2s;
+      }
+
+      .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        animation: fade-in-down 0.8s ease-out;
+        animation-delay: 0.4s;
+      }
+
+      @media (min-width: 640px) {
+        .hero-buttons {
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .hero h1 {
+          font-size: 3.75rem;
+        }
+      }
+
+      @keyframes fade-in-down {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-gradient-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 128px;
+        background: linear-gradient(to top, var(--background), transparent);
+      }
+
+      /* Services Section */
+      .services {
+        padding: 5rem 0;
+        background-color: white;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        background: linear-gradient(to right, var(--cloud-dark), var(--cloud), var(--cloud-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .section-header p {
+        font-size: 1.25rem;
+        color: var(--text-gray);
+        max-width: 48rem;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 6rem;
+      }
+
+      @media (min-width: 768px) {
+        .service-card {
+          flex-direction: row;
+        }
+
+        .service-card.reverse {
+          flex-direction: row-reverse;
+        }
+
+        .section-header h2 {
+          font-size: 2.5rem;
+        }
+      }
+
+      .service-image {
+        flex: 1;
+      }
+
+      .service-image-container {
+        height: 300px;
+        overflow: hidden;
+        border-radius: 1rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      @media (min-width: 768px) {
+        .service-image-container {
+          height: 400px;
+        }
+      }
+
+      .service-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+      }
+
+      .service-image-container:hover img {
+        transform: scale(1.05);
+      }
+
+      .service-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .service-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .service-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background-color: var(--cloud-light);
+        border-radius: 9999px;
+        margin-right: 0.75rem;
+      }
+
+      .service-title h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        background: linear-gradient(to right, var(--cloud-dark), var(--cloud), var(--cloud-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .service-description {
+        font-size: 1.125rem;
+        color: var(--text-gray);
+        margin-bottom: 1.5rem;
+      }
+
+      .features {
+        margin-top: 8rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .features-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .feature-card {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(4px);
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border-radius: 1rem;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .feature-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        background-color: var(--cloud-light);
+        border-radius: 9999px;
+        margin-bottom: 1.25rem;
+      }
+
+      .feature-icon-circle {
+        width: 40px;
+        height: 40px;
+        background-color: var(--cloud-dark);
+        border-radius: 9999px;
+      }
+
+      .feature-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      .feature-description {
+        color: var(--text-gray);
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-link {
+        color: var(--cloud-dark);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .feature-link:hover {
+        color: var(--cloud);
+      }
+
+      /* About Section */
+      .about {
+        padding: 6rem 0;
+        background-image: linear-gradient(109.6deg, rgba(223,234,247,1) 11.2%, rgba(244,248,252,1) 91.1%);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      @media (min-width: 768px) {
+        .about-grid {
+          grid-template-columns: repeat(2, 1fr);
+          align-items: center;
+        }
+      }
+
+      .about-content h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(to right, var(--cloud-dark), var(--cloud), var(--cloud-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .about-text {
+        color: var(--text-gray);
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .stats {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--cloud-dark);
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        color: var(--text-gray);
+      }
+
+      .about-image {
+        position: relative;
+      }
+
+      .about-image img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .logo-badge {
+        position: absolute;
+        bottom: -32px;
+        left: -32px;
+        background-color: white;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .logo-badge img {
+        width: 96px;
+        height: 96px;
+        object-fit: contain;
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 6rem 0;
+        background-color: var(--cloud-light);
+      }
+
+      .contact-container {
+        max-width: 1024px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 768px) {
+        .contact-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .contact-info {
+        padding: 2rem;
+        background-color: var(--cloud-dark);
+        color: white;
+      }
+
+      @media (min-width: 768px) {
+        .contact-info {
+          padding: 3rem;
+        }
+      }
+
+      .contact-info h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-info p {
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-details {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .contact-label {
+        font-weight: 500;
+      }
+
+      .contact-value {
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
+
+      .contact-value a {
+        color: white;
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .contact-value a:hover {
+        opacity: 1;
+      }
+
+      .contact-form {
+        padding: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .contact-form {
+          padding: 3rem;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-gray);
+        margin-bottom: 0.25rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .form-input:focus {
+        border-color: var(--cloud-dark);
+        box-shadow: 0 0 0 2px rgba(74, 111, 140, 0.2);
+      }
+
+      .form-textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 0.375rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: var(--cloud-dark);
+        color: white;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background-color: rgba(74, 111, 140, 0.9);
+      }
+
+      .btn-secondary {
+        background-color: white;
+        color: var(--cloud-dark);
+        border: 1px solid var(--cloud-dark);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--cloud-light);
+      }
+
+      .btn-loading {
+        position: relative;
+      }
+
+      .btn-loading .loading-spinner {
+        animation: spin 1s linear infinite;
+        margin-right: 0.5rem;
+      }
+
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      /* Footer */
+      .footer {
+        background-color: var(--cloud-dark);
+        padding: 3rem 0;
+        color: white;
+      }
+
+      .footer-top {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-top {
+          flex-direction: row;
+        }
+      }
+
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-logo {
+          margin-bottom: 0;
+        }
+      }
+
+      .footer-logo img {
+        height: 48px;
+        margin-right: 0.75rem;
+      }
+
+      .footer-logo-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .footer-brand {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .footer-tagline {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-links {
+          flex-direction: row;
+          gap: 2rem;
+        }
+      }
+
+      .footer-link {
+        color: white;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-link:hover {
+        color: var(--cloud-light);
+      }
+
+      .social-link {
+        display: flex;
+        align-items: center;
+      }
+
+      .social-link svg {
+        margin-right: 0.5rem;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      @media (min-width: 768px) {
+        .footer-bottom {
+          flex-direction: row;
+        }
+      }
+
+      .footer-copyright {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-copyright {
+          margin-bottom: 0;
+        }
+      }
+
+      .footer-policies {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .footer-policy {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-policy:hover {
+        color: white;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        background-color: #10b981;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.375rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        z-index: 9999;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .toast-close {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <a href="#" class="navbar-logo">
+          <img src="./images/logo.png" alt="Efekt Chmury Logo">
+          <span>Efekt Chmury</span>
+        </a>
+
+        <div class="navbar-links" id="desktop-menu">
+          <a href="#services">Usługi</a>
+          <a href="#about">O nas</a>
+          <a href="#contact">Kontakt</a>
+          <a href="https://www.instagram.com/efektchmury/" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+          <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobile-menu">
+        <div class="container">
+          <a href="#services" onclick="closeMobileMenu()">Usługi</a>
+          <a href="#about" onclick="closeMobileMenu()">O nas</a>
+          <a href="#contact" onclick="closeMobileMenu()">Kontakt</a>
+          <a href="https://www.instagram.com/efektchmury/" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+            </svg>
+            <span>Instagram</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <!-- Animated smoke effects -->
+      <div class="smoke-animation-container">
+        <div class="smoke-animation"></div>
+        <div class="smoke-animation"></div>
+        <div class="smoke-animation"></div>
+      </div>
+      
+      <div class="container">
+        <div class="hero-content">
+          <h1>Niezapomniana atmosfera,<br>profesjonalne efekty</h1>
+          <p>Podnieś poziom swojego wydarzenia dzięki profesjonalnemu efektowi ciężkiego dymu.<br>Efekt Chmury to firma, która zapewni niezapomnianą atmosferę i ogromne wrażenie.</p>
+          <div class="hero-buttons">
+            <a href="#services" class="btn btn-primary">Nasze usługi</a>
+            <a href="#contact" class="btn btn-secondary">Skontaktuj się</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-gradient-bottom"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Profesjonalny efekt ciężkiego dymu</h2>
+          <p>Przekształć swoje wydarzenie za pomocą naszego efektu ciężkiego dymu, aby stworzyć piękną i niezapomnianą chwilę. Działamy na terenie województwa lubelskiego.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-image">
+            <div class="service-image-container">
+              <img src="./images/wedding.png" alt="Ciężki dym na twoje wesele">
+            </div>
+          </div>
+          <div class="service-content">
+            <div class="service-title">
+              <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A6F8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                </svg>
+              </div>
+              <h3>Ciężki dym na twoje wesele</h3>
+            </div>
+            <p class="service-description">Ciężki dym z pewnością doda wyjątkowego uroku Twojemu weselu, tworząc magiczną atmosferę na parkiecie. Spraw, aby Twój pierwszy taniec odbył się w otoczeniu lekkiej chmury, która zapewni niezapomniane wspomnienia. Oferujemy również tę usługę podczas krojenia tortu oraz sesji zdjęciowych.</p>
+            <a href="#contact" class="btn btn-primary">Skontaktuj się</a>
+          </div>
+        </div>
+
+        <div class="service-card reverse">
+          <div class="service-image">
+            <div class="service-image-container">
+              <img src="./images/photo.png" alt="Ciężki dym na twoją sesję zdjęciową">
+            </div>
+          </div>
+          <div class="service-content">
+            <div class="service-title">
+              <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A6F8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                  <circle cx="12" cy="13" r="3"></circle>
+                </svg>
+              </div>
+              <h3>Ciężki dym na twoją sesję zdjęciową</h3>
+            </div>
+            <p class="service-description">Udoskonal swoją sesję zdjęciową dzięki naszemu efektowi ciężkiego dymu. Profesjonalne podejście gwarantuje niezapomniane efekty, które podkreślą klimat Twojej sesji i dodadzą jej tajemniczego, magicznego charakteru. Idealny efekt zarówno do sesji modowych, artystycznych jak i komercyjnych.</p>
+            <a href="#contact" class="btn btn-primary">Skontaktuj się</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-image">
+            <div class="service-image-container">
+              <img src="./images/event.png" alt="Ciężki dym na twój event">
+            </div>
+          </div>
+          <div class="service-content">
+            <div class="service-title">
+              <div class="service-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A6F8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18V5l12-2v13"></path>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+              </div>
+              <h3>Ciężki dym na twój event</h3>
+            </div>
+            <p class="service-description">Przekształć swoje wydarzenie dzięki naszym czarującym chmurom na parkiecie. Idealne na wesela, przyjęcia i imprezy firmowe, wystąpienia, koncerty, przedstawienia, sesje produktowe. Nasze efekty ciężkiego dymu urzekają każdego uczestnika i tworzą niezapomnianą atmosferę dla Twojego wyjątkowego wydarzenia.</p>
+            <a href="#contact" class="btn btn-primary">Skontaktuj się</a>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="section-header">
+            <h2>Profesjonalny efekt ciężkiego dymu</h2>
+            <p>Odmień swoje wydarzenie w województwie lubelskim dzięki naszemu profesjonalnemu efektowi ciężkiego dymu, tworząc magiczną i niezapomnianą atmosferę na każdą okazję.</p>
+          </div>
+          
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <div class="feature-icon-circle"></div>
+              </div>
+              <h3 class="feature-title">Magiczny efekt chmury</h3>
+              <p class="feature-description">Odmień miejsce swojego wydarzenia dzięki efektom ciężkiego dymu, dodając dramaturgii i elegancji każdej uroczystości.</p>
+              <a href="#contact" class="feature-link">Więcej informacji →</a>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">
+                <div class="feature-icon-circle"></div>
+              </div>
+              <h3 class="feature-title">Mistyczna atmosfera</h3>
+              <p class="feature-description">Wzbogać występy gęstym, mistycznym dymem, który podnosi wrażenia uczestników wydarzenia na wyższy poziom.</p>
+              <a href="#contact" class="feature-link">Więcej informacji →</a>
+            </div>
+            
+            <div class="feature-card">
+              <div class="feature-icon">
+                <div class="feature-icon-circle"></div>
+              </div>
+              <h3 class="feature-title">Spektakularne wejście w chmurze</h3>
+              <p class="feature-description">Stwórz niezapomniane wejście dzięki urzekającym efektom dymu, które budują scenę dla magicznych momentów.</p>
+              <a href="#contact" class="feature-link">Więcej informacji →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-content">
+            <h2>Efekt Ciężkiego Dymu</h2>
+            <p class="about-text">
+              Stwórz niezapomniane momenty na swoich wydarzeniach dzięki naszym efektom ciężkiego dymu, podnosząc każdą okazję w województwie lubelskim do nadzwyczajnych wysokości.
+            </p>
+            <p class="about-text">
+              W Efekt Chmury wiemy, jak ważne są wyjątkowe chwile. Nasz profesjonalny efekt ciężkiego dymu sprawia, że każde wydarzenie staje się magiczne i niezapomniane. Działamy na terenie województwa lubelskiego, oferując usługi na najwyższym poziomie.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Zadowolonych klientów</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Zrealizowanych eventów</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">6+</div>
+                <div class="stat-label">Lat doświadczenia</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="./images/about.png" alt="Efekt Ciężkiego Dymu">
+            <div class="logo-badge">
+              <img src="./images/logo.png" alt="Efekt Chmury Logo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-container">
+          <div class="contact-grid">
+            <div class="contact-info">
+              <h2>Skontaktuj się z nami w sprawie twojego wydarzenia</h2>
+              <p>
+                Efekt Chmury to niezapomniane efekty dymne na Twoim wydarzeniu. Wypełnij formularz, a my skontaktujemy się z Tobą, aby omówić szczegóły.
+              </p>
+              
+              <div class="contact-details">
+                <div class="contact-item">
+                  <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="contact-label">Lokalizacja</div>
+                    <div class="contact-value">Województwo lubelskie</div>
+                  </div>
+                </div>
+                
+                <div class="contact-item">
+                  <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="contact-label">Social Media</div>
+                    <div class="contact-value">
+                      <a href="https://www.instagram.com/efektchmury/" target="_blank" rel="noopener noreferrer">
+                        @efektchmury
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="contact-form">
+              <form id="contact-form">
+                <div class="form-group">
+                  <label for="name" class="form-label">Imię i nazwisko</label>
+                  <input
+                    id="name"
+                    type="text"
+                    class="form-input"
+                    required
+                    placeholder="Twoje imię"
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-input"
+                    required
+                    placeholder="twoj@email.com"
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label for="message" class="form-label">Wiadomość</label>
+                  <textarea
+                    id="message"
+                    class="form-input form-textarea"
+                    required
+                    placeholder="Opisz swoje wydarzenie i czego potrzebujesz..."
+                  ></textarea>
+                </div>
+                
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  id="submit-button"
+                >
+                  Wyślij wiadomość
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-logo">
+            <img src="./images/logo.png" alt="Efekt Chmury Logo">
+            <div class="footer-logo-text">
+              <div class="footer-brand">Efekt Chmury</div>
+              <div class="footer-tagline">HEAVY SMOKE EFFECT</div>
+            </div>
+          </div>
+          
+          <div class="footer-links">
+            <a href="#services" class="footer-link">Usługi</a>
+            <a href="#about" class="footer-link">O nas</a>
+            <a href="#contact" class="footer-link">Kontakt</a>
+            <a
+              href="https://www.instagram.com/efektchmury/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-link social-link"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+              </svg>
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            &copy; <span id="current-year"></span> Efekt Chmury. Wszelkie prawa zastrzeżone.
+          </div>
+          <div class="footer-policies">
+            <a href="#" class="footer-policy">Polityka prywatności</a>
+            <a href="#" class="footer-policy">Warunki korzystania</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+      <span id="toast-message">Wiadomość wysłana! Dziękujemy za kontakt.</span>
+      <button class="toast-close" onclick="hideToast()">✕</button>
+    </div>
+
+    <script>
+      // Navbar toggle and scroll effect
+      document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const contactForm = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const currentYearElement = document.getElementById('current-year');
+
+        // Set current year
+        currentYearElement.textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        function handleScroll() {
+          if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Run once at page load
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+          mobileMenu.classList.toggle('mobile-menu-active');
+          
+          if (mobileMenu.classList.contains('mobile-menu-active')) {
+            menuIcon.style.display = 'none';
+            closeIcon.style.display = 'block';
+          } else {
+            menuIcon.style.display = 'block';
+            closeIcon.style.display = 'none';
+          }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu
+        window.closeMobileMenu = function() {
+          mobileMenu.classList.remove('mobile-menu-active');
+          menuIcon.style.display = 'block';
+          closeIcon.style.display = 'none';
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 100,
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+
+        // Form submission
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const nameInput = document.getElementById('name');
+          const emailInput = document.getElementById('email');
+          const messageInput = document.getElementById('message');
+          
+          if (!nameInput.value || !emailInput.value || !messageInput.value) {
+            return;
+          }
+          
+          // Change button to loading state
+          submitButton.innerHTML = '<svg class="loading-spinner" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>Wysyłanie...';
+          submitButton.disabled = true;
+          
+          // Simulate form submission
+          setTimeout(() => {
+            // Reset form
+            contactForm.reset();
+            
+            // Reset button
+            submitButton.innerHTML = 'Wyślij wiadomość';
+            submitButton.disabled = false;
+            
+            // Show toast
+            showToast('Wiadomość wysłana! Dziękujemy za kontakt.');
+          }, 1500);
+        });
+
+        // Toast functions
+        window.showToast = function(message) {
+          const toast = document.getElementById('toast');
+          const toastMessage = document.getElementById('toast-message');
+          
+          toastMessage.textContent = message;
+          toast.classList.add('show');
+          
+          setTimeout(() => {
+            hideToast();
+          }, 5000);
+        }
+
+        window.hideToast = function() {
+          const toast = document.getElementById('toast');
+          toast.classList.remove('show');
+        }
+      });
+    </script>
   </body>
 </html>
+
