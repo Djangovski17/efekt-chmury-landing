@@ -83,14 +83,14 @@ const Services = () => {
             title="Ciężki dym na twoje wesele" 
             description="Ciężki dym z pewnością doda wyjątkowego uroku Twojemu weselu, tworząc magiczną atmosferę na parkiecie. Spraw, aby Twój pierwszy taniec odbył się w otoczeniu lekkiej chmury, która zapewni niezapomniane wspomnienia. Oferujemy również tę usługę podczas krojenia tortu oraz sesji zdjęciowych."
             icon={<Heart className="text-cloud-dark" size={24} />} 
-            image="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1000&auto=format&fit=crop"
+            image="/lovable-uploads/3d7367d5-2324-4319-8432-f9ca5941e417.png"
           />
           
           <ServiceCard 
             title="Ciężki dym na twoją sesję zdjęciową" 
-            description="Udoskonal swoją sesję zdjęciową dzięki naszemu efektowi ciężkiego dymu. Profesjonalne podejście gwarantuje niezapomniane efekty, które podkreślą klimat Twojej sesji i dodadzą jej tajemniczego, magicznego charakteru. Idealne rozwiązanie dla fotografów poszukujących wyjątkowych efektów wizualnych."
+            description="Udoskonal swoją sesję zdjęciową dzięki naszemu efektowi ciężkiego dymu. Profesjonalne podejście gwarantuje niezapomniane efekty, które podkreślą klimat Twojej sesji i dodadzą jej tajemniczego, magicznego charakteru. Idealny efekt zarówno do sesji modowych, artystycznych jak i komercyjnych."
             icon={<Camera className="text-cloud-dark" size={24} />} 
-            image="https://images.unsplash.com/photo-1551022372-0bdac482b9d6?q=80&w=1000&auto=format&fit=crop"
+            image="/lovable-uploads/f0d57df3-94b5-452a-895e-4b7ec912ffa9.png"
             reverse={true}
           />
           
@@ -98,32 +98,32 @@ const Services = () => {
             title="Ciężki dym na twój event" 
             description="Przekształć swoje wydarzenie dzięki naszym czarującym chmurom na parkiecie. Idealne na wesela, przyjęcia i imprezy firmowe, wystąpienia, koncerty, przedstawienia, sesje produktowe. Nasze efekty ciężkiego dymu urzekają każdego uczestnika i tworzą niezapomnianą atmosferę dla Twojego wyjątkowego wydarzenia."
             icon={<Music className="text-cloud-dark" size={24} />} 
-            image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop"
+            image="/lovable-uploads/b2cc8b73-ac43-427a-ade2-8658461ba50c.png"
           />
         </div>
 
         <div className="mt-32">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center gradient-text">
-            Professional Heavy Smoke Services
+            Profesjonalny efekt ciężkiego dymu
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto text-center mb-16">
-            Transform your event in Lublin with our professional heavy smoke effects, creating memorable and mesmerizing atmospheres for all occasions.
+            Odmień swoje wydarzenie w województwie lubelskim dzięki naszemu profesjonalnemu efektowi ciężkiego dymu, tworząc magiczną i niezapomnianą atmosferę na każdą okazję.
           </p>
           
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard 
-              title="Enchanting Cloud effects" 
-              description="Transform your venue with heavy smoke effects, adding drama and elegance to any event."
+              title="Magiczny efekt chmury" 
+              description="Odmień miejsce swojego wydarzenia dzięki efektom ciężkiego dymu, dodając dramaturgii i elegancji każdej uroczystości."
               icon={<div className="w-10 h-10 bg-cloud-dark rounded-full"></div>} 
             />
             <FeatureCard 
-              title="Mystical Atmosphere" 
-              description="Enhance performances with thick, mystical smoke that elevates the audience experience."
+              title="Mistyczna atmosfera" 
+              description="Wzbogać występy gęstym, mistycznym dymem, który podnosi wrażenia uczestników wydarzenia na wyższy poziom."
               icon={<div className="w-10 h-10 bg-cloud-dark rounded-full"></div>} 
             />
             <FeatureCard 
-              title="Spectacular Smoke Entrance" 
-              description="Create unforgettable entrances with captivating smoke effects that set the stage for magic moments."
+              title="Spektakularne wejście w chmurze" 
+              description="Stwórz niezapomniane wejście dzięki urzekającym efektom dymu, które budują scenę dla magicznych momentów."
               icon={<div className="w-10 h-10 bg-cloud-dark rounded-full"></div>} 
             />
           </div>
