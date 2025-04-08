@@ -34,13 +34,13 @@ const About = () => {
             </div>
             <div className="relative">
               <img 
-                src="/lovable-uploads/017087ac-9a1b-45dd-b36b-94ef1a175049.png" 
+                src="/lovable-uploads/a4c14588-48fa-4d8e-8351-96fa1e441057.png" 
                 alt="Efekt Ciężkiego Dymu" 
                 className="rounded-lg shadow-xl w-full h-[400px] object-cover"
               />
               <div className="absolute -bottom-8 -left-8 bg-white p-4 rounded-lg shadow-lg">
                 <img 
-                  src="/lovable-uploads/36b3f9dc-d4a6-453e-82f2-d3ca53b94def.png"
+                  src="/lovable-uploads/3e2d4671-db0f-4dce-92fb-cb9b6dfea73f.png"
                   alt="Efekt Chmury Logo" 
                   className="w-24 h-24 object-contain"
                 />
