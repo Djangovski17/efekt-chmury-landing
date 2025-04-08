@@ -1,12 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
 import { Instagram, Menu, X } from 'lucide-react';
-import { useMobile } from '../hooks/use-mobile';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,7 +73,6 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Mobile menu */}
       {isMobile && (
         <div className={`absolute w-full bg-white shadow-md transition-all duration-300 ${mobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
           <div className="container mx-auto px-4 py-2">
