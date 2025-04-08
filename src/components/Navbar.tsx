@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Instagram, Menu, X } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
